@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>生肖 || 六合彩</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .wrapper{
+            width: 1000px;
+            margin: 50px auto;
+        }
+        #result{
+            margin-top: 30px;
+        }
+        li{
+            list-style: none;
+        }
+        hr{
+            margin: 15px 0;
+        }
+        .lottery-group{
+            width: 100%;
+        }
+        .lottery-group li{
+            display: inline-block;
+            position: relative;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            border-radius: 50%;
+            margin: 10px;
+            color: #fff;
+            box-shadow: 4px 4px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+        .lottery-group li:nth-child(3n + 0){
+            background-color: #c02000;
+            border: 1px solid #801e0a;
+        }
+        .lottery-group li:nth-child(3n + 0):hover{
+            background-color: #801e0a;
+            border: 1px solid #c02000;
+        }
+        .lottery-group li:nth-child(3n + 1){
+            background-color: #019fce;
+            border: 1px solid #096c8a;
+        }
+        .lottery-group li:nth-child(3n + 1):hover{
+            background-color: #096c8a;
+            border: 1px solid #019fce;
+        }
+        .lottery-group li:nth-child(3n + 2){
+            background-color: #099a20;
+            border: 1px solid #074a12;
+        }
+        .lottery-group li:nth-child(3n + 2):hover{
+            background-color: #074a12;
+            border: 1px solid #099a20;
+        }
+        .lottery-group .num{
+            display: inline-block;
+            width: 100px;
+            font-weight: bold;
+            font-size: 36px;
+        }
+        .lottery-group .lottery{
+            position: absolute;
+            left: 42%;
+            bottom: -34px;
+        }
+        #year{
+            padding: 6px 10px;
+            border-radius: 4px;
+            border: 1px solid #aaa;
+        }
+        #check{
+            padding: 5px 20px;
+            background: #eaeaea;
+            border: 1px solid #aaa;
+            border-radius: 4px;
+            color: #333;
+            cursor: pointer;
+            vertical-align: top;
+        }
+        </style>
+</head>
+<body>
+    <!--
+        @ 输入年份查询到相应的生肖和六合彩号码
+        @ server free project
+    -->
+    <div class="wrapper">
+        输入年份：
+        <input type="text" id="year" placeholder="2017" >
+        <button id="check">查询</button>
+        <hr>
+        <div id="lottery">...</div>
+        <div id="result"></div>
+    </div>
+    <script>
+        window.onload = function() {
+            var lotteryArr = ["鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊", "猴", "鸡", "狗", "猪"];
+            var RefValue = { "year": 1900, "lottery": "鼠"};
+
+            document.getElementById('check').addEventListener('click', function(){
+                var year = Number(document.getElementById("year").value) || 2017;
+                var maxLength = 49;
+                var lottery = lotteryArr[(lotteryArr.indexOf(RefValue.lottery) + year - RefValue.year) % 12];
+                document.getElementById("lottery").innerHTML = year + "年生肖为： " + lottery;
+                var str = "<ul class='lottery-group'>";
+                for (var i = 0; i < maxLength; i++) {
+                    var current = year - maxLength + i + 1;
+                    var currentLottery = lotteryArr[(lotteryArr.indexOf(RefValue.lottery) + current - RefValue.year) % 12];
+                    str += "<li><span class='num'>" + ((i+1) < 10 ? '0' + (i+1) : (i+1)) + "</span><span class='lottery'>" + currentLottery + "</span></li>";
+                }
+                str += "</ul>";
+
+                document.getElementById("result").innerHTML = str;
+            })
+        }
+    </script>
+</body>
+</html>
