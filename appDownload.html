@@ -4,24 +4,26 @@
 	<meta charset="UTF-8">
 	<title>下载</title>
 	<script>
-		var u = navigator.userAgent;  
-        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端  
-        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端  
+        function load(){
+            var u = navigator.userAgent;  
+            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端  
+            var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端  
 
-        var ua = window.navigator.userAgent.toLowerCase();  
-        if (ua.match(/MicroMessenger/i) == 'micromessenger') {  
-           document.body.innerHTML = "<img src='./wx.jpg' width='100%'>";
-        } else {
-            if(isAndroid){  
-                window.open("http://server.m.pp.cn/download/apk?appId=7758200&custom=0&ch_src=pp_dev&ch=default", "_self");
-            }else if(isiOS){  
-                alert("IOS版本暂未开放"); 
-            }else{
-                alert("暂不支持该终端类型");
+            var ua = window.navigator.userAgent.toLowerCase();  
+            if (ua.match(/MicroMessenger/i) == 'micromessenger') {  
+               document.body.innerHTML = "<img src='./wx.jpg' width='100%' />";
+            } else {
+                if(isAndroid){  
+                    window.open("http://server.m.pp.cn/download/apk?appId=7758200&custom=0&ch_src=pp_dev&ch=default", "_self");
+                }else if(isiOS){  
+                    alert("IOS版本暂未开放"); 
+                }else{
+                    alert("暂不支持该终端类型");
+                }
             }
-        }
 
+        }
 	</script>
 </head>
-<body></body>
+<body onload="load();"></body>
 </html>
