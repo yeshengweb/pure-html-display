@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>测试页</title>
+    <style>
+        *{margin: 0; padding:0;}
+        html, body{width: 100%; height: 100%}
+        body{ display: flex; justify-content: center; align-items: center;}
+        .number-group{position: relative; width: 200px; height: 100px; }
+        .number-wpt{ position: absolute; width: calc(30%);height: 100%;top: 0;}
+        .number-wpt:nth-child(1){ left: 0;}
+        .number-wpt:nth-child(2){ left: 35%;}
+        .number-wpt:nth-child(3){ left: 68%;}
+        .number-item {position: absolute; border: 1px solid #ddd; border-radius: 4px;}
+        .number-item.active{ background: #2c82c9;}
+        .number-item:nth-child(1),
+        .number-item:nth-child(4),
+        .number-item:nth-child(7) { height: 4px; left: 6px; right: 6px;}
+        .number-item:nth-child(2),
+        .number-item:nth-child(3),
+        .number-item:nth-child(5),
+        .number-item:nth-child(6){ width: 4px; height: calc(50% - 8px); transform: rotate(2deg);}
+        .number-item:nth-child(1){top: 0;}
+        .number-item:nth-child(2){top: 6px; right: 0;}
+        .number-item:nth-child(3){top: calc(50% + 4px); right: 0;}
+        .number-item:nth-child(4){bottom: -2px; }
+        .number-item:nth-child(5){top: calc(50% + 4px); left: 0;}
+        .number-item:nth-child(6){top: 6px; left: 0; }
+        .number-item:nth-child(7){top: calc(50% - 2px);}
+        @media screen and (max-width: 768px) {
+            .number-group { width: 50vw; height: 12vh;}
+        }
+    </style>
+</head>
+<body>
+    <div class="number-group">
+        <div class="number-wpt">
+            <div class="number-item"></div>
+            <div class="number-item"></div>
+            <div class="number-item"></div>
+            <div class="number-item"></div>
+            <div class="number-item"></div>
+            <div class="number-item"></div>
+            <div class="number-item"></div>
+        </div>
+        <div class="number-wpt">
+            <div class="number-item"></div>
+            <div class="number-item"></div>
+            <div class="number-item"></div>
+            <div class="number-item"></div>
+            <div class="number-item"></div>
+            <div class="number-item"></div>
+            <div class="number-item"></div>
+        </div>
+        <div class="number-wpt">
+            <div class="number-item"></div>
+            <div class="number-item"></div>
+            <div class="number-item"></div>
+            <div class="number-item"></div>
+            <div class="number-item"></div>
+            <div class="number-item"></div>
+            <div class="number-item"></div>
+        </div>
+    </div>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    var numberGroup = [
+        [1, 2, 3, 4, 5, 6],
+        [2, 3],
+        [1, 2, 4, 5, 7],
+        [1, 2, 3, 4, 7],
+        [2, 3, 6, 7],
+        [1, 3, 4, 6, 7],
+        [1, 3, 4, 5, 6, 7],
+        [1, 2, 3],
+        [1, 2, 3, 4, 5, 6, 7],
+        [1, 2, 3, 6, 7]
+    ];
+
+    var index = 0;
+
+    function toNum(num, length) {
+        var newNum = num.toString();
+        while(newNum.length < length) {
+            newNum = '0' + newNum;
+        }
+        return newNum;
+    }
+
+    function showNumber() {
+        index %= 1000;
+        $(".number-item").removeClass("active");
+
+        var value = toNum(index, 3);
+        value.split("").map(function(n, i){
+            numberGroup[n].map(function(item) {
+                $(".number-wpt").eq(i).find(".number-item").eq(item - 1).addClass("active");
+            });
+        });
+        index ++;
+        setTimeout(showNumber, 1000);
+    }
+
+    showNumber();
+</script>
+</body>
+</html>
