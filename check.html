@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset={CHARSET}" />
@@ -37,7 +37,7 @@
 </body>
 </html>
 <script type="text/javascript">
-	var currentDay = moment("2018-5-24");
+	var currentDay = moment("2019-1-15");
 	var currentWork = 0;	//夜班
 	var workArr = ["一天一宿", "夜班", "休息"];
 	document.getElementById("year").innerHTML = generateOptions(2018, new Date().getFullYear());
@@ -62,7 +62,7 @@
 
 		var diffDays = now.diff(currentDay, 'days');
 		var noWork = "";
-		if (diffDays >= 0) {
+		if (diffDays % 3 >= 0) {
 			noWork = workArr[diffDays % 3];
 		} else {
 			noWork = workArr[diffDays % 3 + 3];
@@ -73,8 +73,15 @@
 	function checknow(){
 		var now = moment(new Date());
 
-		var diffDays = now.diff(currentDay, 'days')
+		var diffDays = now.diff(currentDay, 'days');
 		var noWork = workArr[diffDays % 3];
 		document.getElementById("showInfo").innerHTML = "今天：" + noWork;
 	}
+
+
+	//默认查询当天
+	document.getElementById("year").value = new Date().getFullYear();
+	document.getElementById("month").value = new Date().getMonth() + 1;
+	document.getElementById("day").value = new Date().getDate();
+	checknow();
 </script>
