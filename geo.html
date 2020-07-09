@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<style type="text/css">
+			body,
+			html,
+			#allmap {
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				margin: 0;
+				font-family: "微软雅黑";
+			}
+		</style>
+		<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=osP6AKRwYmikACfwduEdHlR0H1UbKb6T"></script>
+		<title>西青警区分布图</title>
+	</head>
+	<body>
+		<div id="allmap"></div>
+	</body>
+</html>
+
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");
+	map.centerAndZoom(new BMap.Point(117.025052, 39.115388), 14);
+	map.enableScrollWheelZoom();
+
+	var polygon = new BMap.Polygon([
+		new BMap.Point(117.017292, 39.145806),
+		new BMap.Point(117.035402, 39.14782),
+		new BMap.Point(117.050062, 39.148268),
+		new BMap.Point(117.052649, 39.14491),
+		new BMap.Point(117.051499, 39.136403),
+		new BMap.Point(117.050924, 39.132821),
+		new BMap.Point(117.050924, 39.132821),
+		new BMap.Point(117.032527, 39.110428),
+		new BMap.Point(117.025628, 39.1111),
+		new BMap.Point(116.997745, 39.116251),
+		new BMap.Point(117.000619, 39.140433),
+		new BMap.Point(117.017867, 39.146253),
+		new BMap.Point(117.017292, 39.145806)
+	], {
+		strokeColor: "blue",
+		strokeWeight: 2,
+		strokeOpacity: 0.5
+	}); //创建多边形
+	map.addOverlay(polygon); //增加多边形
+	var polygon = new BMap.Polygon([
+
+		new BMap.Point(117.051499, 39.136403),
+		new BMap.Point(117.050924, 39.132821),
+		new BMap.Point(117.032527, 39.110428),
+		new BMap.Point(117.031737, 39.097605),
+		new BMap.Point(117.03648, 39.095813),
+		new BMap.Point(117.07004, 39.094581),
+		new BMap.Point(117.069681, 39.113452),
+		new BMap.Point(117.069681, 39.127391),
+		new BMap.Point(117.062494, 39.132709),
+		new BMap.Point(117.051499, 39.136403)
+
+	], {
+		strokeColor: "red",
+		strokeWeight: 2,
+		strokeOpacity: 0.5
+	}); //创建多边形
+	map.addOverlay(polygon); //增加多边形
+	var point = new BMap.Point(117.024299, 39.131814);
+	var opts = {
+		position: point, // 指定文本标注所在的地理位置
+		offset: new BMap.Size(0, 0) //设置文本偏移量
+	}
+	var label = new BMap.Label("杨柳青警区", opts); // 创建文本标注对象
+	label.setStyle({
+		color: "blue",
+		fontSize: "20px",
+		height: "20px",
+		lineHeight: "20px",
+		fontFamily: "微软雅黑"
+	});
+	map.addOverlay(label);
+
+	var point = new BMap.Point(117.05405, 39.114907);
+	var opts = {
+		position: point, // 指定文本标注所在的地理位置
+		offset: new BMap.Size(0, 0) //设置文本偏移量
+	}
+	var label = new BMap.Label("中北警区", opts); // 创建文本标注对象
+	label.setStyle({
+		color: "red",
+		fontSize: "20px",
+		height: "20px",
+		lineHeight: "20px",
+		fontFamily: "微软雅黑"
+	});
+	map.addOverlay(label);
+</script>
